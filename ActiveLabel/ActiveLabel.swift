@@ -48,7 +48,13 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
     open var customColor: [ActiveType : UIColor] = [:] {
         didSet { updateTextStorage(parseText: false) }
     }
+    open var customFont: [ActiveType : UIFont] = [:] {
+        didSet { updateTextStorage(parseText: false) }
+    }
     open var customSelectedColor: [ActiveType : UIColor] = [:] {
+        didSet { updateTextStorage(parseText: false) }
+    }
+    open var customSelectedFont: [ActiveType : UIFont] = [:] {
         didSet { updateTextStorage(parseText: false) }
     }
     @IBInspectable public var lineSpacing: CGFloat = 0 {
@@ -246,6 +252,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
     // MARK: - private properties
     fileprivate var _customizing: Bool = true
     fileprivate var defaultCustomColor: UIColor = .black
+    fileprivate var defaultCustomFont: UIFont = UIFont.systemFont(ofSize: 14)
     
     internal var mentionTapHandler: ((String) -> ())?
     internal var hashtagTapHandler: ((String) -> ())?
@@ -331,7 +338,9 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             case .mention: attributes[NSAttributedString.Key.foregroundColor] = mentionColor
             case .hashtag: attributes[NSAttributedString.Key.foregroundColor] = hashtagColor
             case .url: attributes[NSAttributedString.Key.foregroundColor] = URLColor
-            case .custom: attributes[NSAttributedString.Key.foregroundColor] = customColor[type] ?? defaultCustomColor
+            case .custom:
+                attributes[NSAttributedString.Key.foregroundColor] = customColor[type] ?? defaultCustomColor
+                attributes[NSAttributedString.Key.font] = customFont[type] ?? defaultCustomFont
             case .email: attributes[NSAttributedString.Key.foregroundColor] = URLColor
             }
             
