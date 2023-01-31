@@ -408,48 +408,48 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
     }
     
     fileprivate func updateAttributesWhenSelected(_ isSelected: Bool) {
-        guard let selectedElement = selectedElement else {
-            return
-        }
+//         guard let selectedElement = selectedElement else {
+//             return
+//         }
         
-        var attributes = textStorage.attributes(at: 0, effectiveRange: nil)
-        let type = selectedElement.type
+//         var attributes = textStorage.attributes(at: 0, effectiveRange: nil)
+//         let type = selectedElement.type
         
-        if isSelected {
-            let selectedColor: UIColor
-            switch type {
-            case .mention: selectedColor = mentionSelectedColor ?? mentionColor
-            case .hashtag: selectedColor = hashtagSelectedColor ?? hashtagColor
-            case .url: selectedColor = URLSelectedColor ?? URLColor
-            case .custom:
-                let possibleSelectedColor = customSelectedColor[selectedElement.type] ?? customColor[selectedElement.type]
-                selectedColor = possibleSelectedColor ?? defaultCustomColor
-            case .email: selectedColor = URLSelectedColor ?? URLColor
-            }
-            attributes[NSAttributedString.Key.foregroundColor] = selectedColor
-        } else {
-            let unselectedColor: UIColor
-            switch type {
-            case .mention: unselectedColor = mentionColor
-            case .hashtag: unselectedColor = hashtagColor
-            case .url: unselectedColor = URLColor
-            case .custom: unselectedColor = customColor[selectedElement.type] ?? defaultCustomColor
-            case .email: unselectedColor = URLColor
-            }
-            attributes[NSAttributedString.Key.foregroundColor] = unselectedColor
-        }
+//         if isSelected {
+//             let selectedColor: UIColor
+//             switch type {
+//             case .mention: selectedColor = mentionSelectedColor ?? mentionColor
+//             case .hashtag: selectedColor = hashtagSelectedColor ?? hashtagColor
+//             case .url: selectedColor = URLSelectedColor ?? URLColor
+//             case .custom:
+//                 let possibleSelectedColor = customSelectedColor[selectedElement.type] ?? customColor[selectedElement.type]
+//                 selectedColor = possibleSelectedColor ?? defaultCustomColor
+//             case .email: selectedColor = URLSelectedColor ?? URLColor
+//             }
+//             attributes[NSAttributedString.Key.foregroundColor] = selectedColor
+//         } else {
+//             let unselectedColor: UIColor
+//             switch type {
+//             case .mention: unselectedColor = mentionColor
+//             case .hashtag: unselectedColor = hashtagColor
+//             case .url: unselectedColor = URLColor
+//             case .custom: unselectedColor = customColor[selectedElement.type] ?? defaultCustomColor
+//             case .email: unselectedColor = URLColor
+//             }
+//             attributes[NSAttributedString.Key.foregroundColor] = unselectedColor
+//         }
         
-        if let highlightFont = hightlightFont {
-            attributes[NSAttributedString.Key.font] = highlightFont
-        }
+//         if let highlightFont = hightlightFont {
+//             attributes[NSAttributedString.Key.font] = highlightFont
+//         }
         
-        if let configureLinkAttribute = configureLinkAttribute {
-            attributes = configureLinkAttribute(type, attributes, isSelected)
-        }
+//         if let configureLinkAttribute = configureLinkAttribute {
+//             attributes = configureLinkAttribute(type, attributes, isSelected)
+//         }
         
-        textStorage.addAttributes(attributes, range: selectedElement.range)
+//         textStorage.addAttributes(attributes, range: selectedElement.range)
         
-        setNeedsDisplay()
+//         setNeedsDisplay()
     }
     
     fileprivate func element(at location: CGPoint) -> ElementTuple? {
